@@ -1,0 +1,37 @@
+cursor.execute("CREATE TABLE IF NOT EXISTS artists (artistID INTEGER NOT NULL PRIMARY KEY, artistName TEXT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS albums (albumID INTEGER NOT NULL PRIMARY KEY, albumName TEXT, yearReleased INT, genre TEXT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS tracks (trackID INTEGER NOT NULL PRIMARY KEY, trackName TEXT, albumID INTEGER, artistID INTEGER, FOREIGN KEY (albumID) REFERENCES albums(albumID), FOREIGN KEY (artistID) REFERENCES artists(artistID))")
+
+
+
+artist = [("ABBA",),("AC/DC",),("a-ha",),("The All-American rejects",),("Avril Lavigne",),("Bakcstreet Boys",),("Baha Man",),("The Beatles",),
+("Billy Joel",),("Blue Swede",),("Bon Jovi",),("Bruce Springsteen",),("Bruno Mars",),("Carl Douglass",),("Carrie Underwood",),("Colbie Calliat",),
+("Coldplay",),("Cyndi Lauper",),("Daniel Powter",),("Dexys Midnight Runners",),("Edwin McClain",),("Elton John",),("Eminem",),("Europe",),
+("Fergie",),("Five for Fighting",),("Foster the People",),("Fountains of Wayne",),("The Fray",),("GAvin DeGraw",),("Goob",),("Green Day",),
+("Gwen Stefani",),("Gym Class Heroes",),("Iyaz",),("Jason Mraz",),("Jimmy Eat World",),("John Foster",),("John Mayer",),("John Mellencamp",),
+("Journey",),("Kety Perry",),("Kelly Clarkson",),("Kin Rock",),("The Killers",),("Lifehouse",),("Lynyrd Skynyrd",),("Maroon 5",),
+("Matchbox Twenty",),("Matt Nathanson",),("Michael Buble",),("Miley Cyrus",), ("Mumford & Sons",), ("Natasha Bedingfield",), ("*NSYNC",),
+("O.A.R.",), ("OneRepublic",), ("Owl City",), ("Plain White Ts",), ("The Proclaimers",), ("Queen",),("Rascal Flatts",), ("Rednex",),
+("Ricky Martin",), ("Sara Bareilles",), ("Semisonic",), ("Smash Mouth",), ("Snow Patrol",), ("Soulja Boy",), ("Spice Girls",), ("Starship",),
+("Survivor",), ("Taylor Swift",), ("Tom Petty",), ("TOTO",), ("Train",), ("Twisted Sister",), ("Vanilla Ice",), ("Village People",), ("Wham!",),
+("Zac Brown Band",)]
+
+album = [("Feeling Strangely Fine",1998," alternative rock"),
+("Abbey Road", 1969, "contemporary rock"),
+("All That We Needed",2005,"classic rock"),
+("american Fool",1982,"classic rock"),
+("American Idiot",2004,"punk rock"),
+("America Town",2000,"rock"),
+("Arrival",1976,"disco"),
+("Astro Lounge",1999,"rock"),
+("Back in Black",1980,"hard rock"),
+("The Battle for Everything",2004,"piano"),
+]
+
+track = [("Closing Time",1,66),("Here Comes The Sun",2,8),("Hey There Delilah",3,59),("Jack and Diane",4,40),("American Idiot",5,32),("Superman (It's Not Easy To Be Me)",6,26),("Dancing Queen",7,1),("All Star",8,67),("You Shook Me All Night Long",9,2),("100 Years To Live", 10,26)]
+
+
+cursor.executemany("INSERT INTO artists (artistName) VALUES (?)", artist)
+cursor.executemany("INSERT INTO albums (albumName, yearReleased, genre) VALUES (?,?,?)", album)
+cursor.executemany("INSERT INTO tracks (trackName, albumID, artistID) VALUES (?,?,?)", track)
+connection.commit()
